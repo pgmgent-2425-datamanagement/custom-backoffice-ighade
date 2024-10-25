@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+#[\AllowDynamicProperties]
 class BaseModel {
 
     protected $table;
@@ -19,14 +20,15 @@ class BaseModel {
 
         if(!isset($this->table)) {
             $single = strtolower( $this->getClassName(get_called_class()));
-            switch(substr($single, -1)) {
-                case 'y':
-                    //for example: Category model => categories table
-                    $this->table = substr($single, 0, -1) . 'ies';
+            switch($single) {
+                case 'deelnemer':
+                    $this->table = "deelnemers";
                     break;
-                case 's':
-                    //for example: News model => news table
-                    $this->table = $single;
+                case 'organisator':
+                    $this->table = "organisatoren";
+                    break;
+                case 'evenement':
+                    $this->table = "evenementen";
                     break;
                 default:
                     //for example: User model => users table
@@ -34,7 +36,7 @@ class BaseModel {
             }
         }
         if(!isset($this->pk)) {
-            $this->pk = 'id';
+            $this->pk = strtolower( $this->getClassName(get_called_class())).'_id';
         }
         if(!isset($this->db)) {
             global $db;
@@ -42,7 +44,7 @@ class BaseModel {
         }
     }
 
-    private function all () {
+    private function list () {
 
         $sql = 'SELECT * FROM `' . $this->table . '`';
         $pdo_statement = $this->db->prepare($sql);
@@ -56,6 +58,7 @@ class BaseModel {
     private function find ( int $id ) {
 
         $sql = 'SELECT * FROM `' . $this->table . '` WHERE `' . $this->pk . '` = :p_id';
+        print_r($sql);
         $pdo_statement = $this->db->prepare($sql);
         $pdo_statement->execute( [ ':p_id' => $id ] );
 
@@ -98,6 +101,9 @@ class BaseModel {
     }
 
     private function getClassName($classname) {
+        if(strpos($classname, '\\') === false) {
+            return $classname;
+        }
         return (substr($classname, strrpos($classname, '\\') + 1));
     }
     

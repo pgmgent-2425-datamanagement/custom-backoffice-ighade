@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Organisator extends BaseModel {
+class Evenement extends BaseModel {
     // public static function list() {
     //     //eigen code...
     // }

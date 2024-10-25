@@ -11,10 +11,10 @@
     <div class="brand">BrandName</div>
 
     <nav>
-        <a href="/">Home</a>
-        <a href="#">item 2</a>
-        <a href="#">item 3</a>
-        <a href="#">item 4</a>
+        <a href="/">Dashboard</a>
+        <a href="/evenementen">Evenementen</a>
+        <a href="/deelnemers">Deelnemers</a>
+        <a href="/organisatoren">Organisatoren</a>
     </nav>
 
     <main>

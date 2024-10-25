@@ -1,23 +1,23 @@
- <?php
+<?php
 
 namespace App\Controllers;
-use App\Models\Deelnemers;
+use App\Models\Deelnemer;
 
-class DeelnemersController extends BaseController {
+class DeelnemerController extends BaseController {
 
     public static function list () {
-        $deelnemers = Deelnemers::list();
-
+        $deelnemers = Deelnemer::list();
+    
         self::loadView('/deelnemers/list', [
             'deelnemers' => $deelnemers
         ]);
     }
 
      public static function details ($id) {
-        $deelnemers = Deelnemers::find($id);
-
-        self::loadView('/deelnemers/detail', [
-            'deelnemers' => $deelnemers
+        $deelnemer = Deelnemer::find($id);
+        print_r($deelnemer);
+        self::loadView('/deelnemers/details', [
+            'deelnemer' => $deelnemer
         ]);
     }
 

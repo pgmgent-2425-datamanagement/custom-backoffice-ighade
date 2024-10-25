@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Organisatoren;
+use App\Models\Organisator;
 
-class OrganisatorenController extends BaseController {
+class OrganisatorController extends BaseController {
 
     public static function list () {
-        $organisatoren = organisatoren::list();
+        $organisatoren = Organisator::list();
+
+        print_r($organisatoren);
 
         self::loadView('/organisatoren/list', [
-            'Organisatoren' => $organisatoren
+            'organisatoren' => $organisatoren
         ]);
     }
 

@@ -1,23 +1,23 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Evenementen;
+use App\Models\Evenement;
 
-class EvenementenController extends BaseController {
+class EvenementController extends BaseController {
 
     public static function list () {
-        $evenementen = evenementen::list();
+        $evenementen = Evenement::list();
 
         self::loadView('/evenementen/list', [
-            'Evenementen' => $evenementen
+            'evenementen' => $evenementen
         ]);
     }
 
      public static function detail ($id) {
-        $evenement = evenementen::find($id);
+        $evenement = Evenement::find($id);
 
         self::loadView('/evenementen/detail', [
-            'Evenementen' => $evenement
+            'evenementen' => $evenement
         ]);
     }
 
