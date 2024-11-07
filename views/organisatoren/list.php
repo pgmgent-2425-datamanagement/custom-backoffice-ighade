@@ -2,15 +2,17 @@
 <table>
    <tr>
         <th>Naam</th>
-        <th>Aanbelvolen door</th>
-        <th>functie</th>
+        <th>Functie</th>
+        <th>Hoofd organisator</th>
+        <th>Hoofd organisator functie</th>
         <th>Acties</th>
     </tr>
     <?php foreach ($organisatoren as $organisator) { ?>
         <tr>
-            <td><?php echo $organisator->naam; ?></td>
-            <td><?php echo $organisator->aanbevolen_organisator_id; ?></td>
-            <td><?php echo $organisator->functie; ?></td>
+            <td><?php echo $organisator->organisator_naam; ?></td>
+            <td><?php echo $organisator->organisator_functie; ?></td>
+            <td><?php echo ($organisator->hoofdorganisator_naam==null) ? "/" :  $organisator->hoofdorganisator_naam; ?></td>
+            <td><?php echo ($organisator->hoofdorganisator_functie==null)?"/": $organisator->hoofdorganisator_functie; ?></td>
         
             <td>
                 <a href="/organisatoren/<?php echo $organisator->organisator_id; ?>">Details</a>

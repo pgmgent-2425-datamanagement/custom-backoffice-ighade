@@ -7,22 +7,24 @@
     <title><?= ($title ?? '') . ' ' . $_ENV['SITE_NAME'] ?></title>
     <link rel="stylesheet" href="/css/main.css?v=<?php if( $_ENV['DEV_MODE'] == "true" ) { echo time(); }; ?>">
 </head>
+<div class="navheader">
+        <div class="brand">Event Horizon</div>
+        <br>
+        <nav>
+            <a href="/">Dashboard</a>
+            <a href="/evenementen">Evenementen</a>
+            <a href="/deelnemers">Deelnemers</a>
+            <a href="/organisatoren">Organisatoren</a>
+        </nav>
+    </div>
 <body>
-    <div class="brand">BrandName</div>
-
-    <nav>
-        <a href="/">Dashboard</a>
-        <a href="/evenementen">Evenementen</a>
-        <a href="/deelnemers">Deelnemers</a>
-        <a href="/organisatoren">Organisatoren</a>
-    </nav>
-
+    
     <main>
         <?= $content; ?>
     </main>
     
     <footer>
-        &copy; <?= date('Y'); ?> - BrandName
+        &copy; <?= date('Y'); ?> - Event Horizon
     </footer>
 </body>
 </html>

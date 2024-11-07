@@ -45,20 +45,17 @@ class BaseModel {
     }
 
     private function list () {
-
         $sql = 'SELECT * FROM `' . $this->table . '`';
         $pdo_statement = $this->db->prepare($sql);
         $pdo_statement->execute();
 
-        $db_items = $pdo_statement->fetchAll(); 
-        
+        $db_items = $pdo_statement->fetchAll();         
         return self::castToModel($db_items);
     }
 
     private function find ( int $id ) {
 
         $sql = 'SELECT * FROM `' . $this->table . '` WHERE `' . $this->pk . '` = :p_id';
-        print_r($sql);
         $pdo_statement = $this->db->prepare($sql);
         $pdo_statement->execute( [ ':p_id' => $id ] );
 
@@ -67,26 +64,25 @@ class BaseModel {
         return self::castToModel($db_item);
     }
 
-    protected function castToModel ($object) {
-        if(!is_object($object) && isset($object[0]) && is_array($object[0])) {
-            //array of items
-            $items = [];
-            foreach($object as $db_item) {
-                $items[] = $this->castToModel($db_item);
-            }
-            return $items;
+    protected static function castToModel($object) {
+    if (!is_object($object) && isset($object[0]) && is_array($object[0])) {
+        $items = [];
+        foreach ($object as $db_item) {
+            $items[] = self::castToModel($db_item);
         }
-        $db_item = (object) $object;
-        //Creates new Model
-        $model_name = get_class($this);
-        $item = new $model_name();
-        //Loops through the db columns and 
-        
-        foreach($db_item as $column => $value) {
-            $item->{$column} = $value;
-        } 
-        return $item;
+        return $items;
     }
+
+    $db_item = (object) $object;
+    $model_name = static::class;
+    $item = new $model_name();
+    
+    foreach ($db_item as $column => $value) {
+        $item->{$column} = $value;
+    }
+
+    return $item;
+}
 
     //static method to call like: Model::deleteById(1);
     private function deleteById ( int $id ) {

@@ -13,18 +13,19 @@ class EvenementController extends BaseController {
         ]);
     }
 
-     public static function detail ($id) {
+     public static function details ($id) {
         $evenement = Evenement::find($id);
-
-        self::loadView('/evenementen/detail', [
-            'evenementen' => $evenement
+        $deelnemers = Evenement::deelnemersOpEvenement($id);
+        self::loadView('/evenementen/details', [
+            'evenement' => $evenement,
+            'deelnemers' => $deelnemers
         ]);
     }
 
      public static function create ($evenement_details) {
         $evenement = evenementen::create($evenement_details);
 
-        self::loadView('/evenementen/detail', [
+        self::loadView('/evenementen/details', [
             'Evenementen' => $evenementen
         ]);
     }
@@ -32,7 +33,7 @@ class EvenementController extends BaseController {
     public static function update ($evenement_details) {
         $evenement = evenementen::update($evenement_details);
 
-        self::loadView('/evenementen/detail', [
+        self::loadView('/evenementen/details', [
             'Evenementen' => $evenementen
         ]);
     }

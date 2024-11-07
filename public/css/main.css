@@ -1,3 +1,15 @@
+.navheader {
+    width: 100%;
+    background-color: #e0e0e0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.brand{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2a2a2a;
+    text-decoration: none;
+}
 body {
     max-width: 1000px;
     margin: 0 auto;
@@ -7,6 +19,7 @@ body {
     background-color: #1e1e1e;
     color: #e0e0e0;
 }
+
 img {
     max-width: 100%;
     height: auto;
@@ -62,4 +75,68 @@ a:active {
 
 tr:hover td {
     background-color: #383838;
+}
+
+
+
+
+
+/* css for forms */
+input,
+textarea,
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #4aa9ff;
+    box-shadow: 0px 0px 5px rgba(74, 169, 255, 0.5);
+}
+
+/* Form Button Styles */
+/* General Button and Input Styles */
+button,
+input {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+
+    color: #2a2a2a;
+    /* Text color */
+    background-color: #e0e0e0;
+    /* Background color */
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover State */
+button:hover,
+input:hover {
+    background-color: #1a8ed1;
+}
+
+/* Active State */
+button:active,
+input:active {
+    background-color: #1474a8;
+    transform: scale(0.98);
 }
