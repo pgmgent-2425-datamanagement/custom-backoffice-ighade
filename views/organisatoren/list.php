@@ -15,9 +15,7 @@
             <td><?php echo ($organisator->hoofdorganisator_functie==null)?"/": $organisator->hoofdorganisator_functie; ?></td>
         
             <td>
-                <a href="/organisatoren/<?php echo $organisator->organisator_id; ?>">Details</a>
-                <a href="/organisatoren/<?php echo $organisator->organisator_id; ?>/edit">Bewerken</a>
-                <a href="/organisatoren/<?php echo $organisator->organisator_id; ?>/delete">Verwijderen</a>
+                <a href="/organisatoren/<?php echo $organisator->organisator_id; ?>">Details / Edit</a>
             </td>
         </tr>
     <?php } ?>

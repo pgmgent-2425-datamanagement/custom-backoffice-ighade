@@ -19,7 +19,8 @@ class OrganisatorController extends BaseController {
         self::loadView('/organisatoren/details', [
             'organisator' => $organisator,
             'evenementen' => $evenementen,
-            'organisatoren' => $organisatoren
+            'organisatoren' => $organisatoren,
+            'categorieen' => $categorieen
         ]);
     }
 
@@ -31,18 +32,10 @@ class OrganisatorController extends BaseController {
         ]);
     }
 
-    public static function updateOrDelete ($organisator_details) {
-        // $organisator = organisatoren::update($organisator_details);
-
-        // self::loadView('/organisatoren/list', [
-        //     'Organisatoren' => $organisatoren
-        // ]);
+    public static function updateOrDelete () {
+        
         if (isset($_POST['delete'])) {
             $deelnemers = Organisator::verwijder($_POST['organisator_id']);
-            // self::loadView('/deelnemers/list', [
-            //     'deelnemers' => $deelnemers
-            // ]);
-        
         }
         elseif (isset($_POST['update'])) {
             $organisator = New Organisator();
@@ -52,7 +45,7 @@ class OrganisatorController extends BaseController {
 
             $organisator->aanbevolen_organisator_id = ($_POST['hoofdorganisator_naam']=='')?NULL:$_POST['hoofdorganisator_naam'];
 
-            $organisator = Organisator::change($organisator);
+            Organisator::change($organisator);
             
             // self::loadView('/organisatoren/list', [
             //     'organisatoren' => $organisatoren

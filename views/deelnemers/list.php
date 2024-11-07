@@ -13,9 +13,7 @@
             <td><?php echo $deelnemer->email; ?></td>
         
             <td>
-                <a href="/deelnemers/<?php echo $deelnemer->deelnemer_id; ?>">Details</a>
-                <a href="/deelnemers/<?php echo $deelnemer->deelnemer_id; ?>/edit">Bewerken</a>
-                <a href="/deelnemers/<?php echo $deelnemer->deelnemer_id; ?>/delete">Verwijderen</a>
+                <a href="/deelnemers/<?php echo $deelnemer->deelnemer_id; ?>">Details / Edit</a>
             </td>
         </tr>
     <?php } ?>

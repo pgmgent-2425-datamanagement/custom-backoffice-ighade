@@ -21,9 +21,8 @@
             <td><?php echo $evenement->organisator_naam; ?></td>
         
             <td>
-                <a href="/evenementen/<?php echo $evenement->evenement_id; ?>">Details</a>
-                <a href="/evenementen/<?php echo $evenement->evenement_id; ?>/edit">Bewerken</a>
-                <a href="/evenementen/<?php echo $evenement->evenement_id; ?>/delete">Verwijderen</a>
+                <a href="/evenementen/<?php echo $evenement->evenement_id; ?>">Details / Edit</a>
+            
             </td>
         </tr>
     <?php } ?>
