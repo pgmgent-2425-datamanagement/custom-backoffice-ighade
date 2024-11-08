@@ -36,9 +36,9 @@
     </tr>
     <?php foreach ($tickets as $ticket) { ?>
         <tr>
-            <td><?= $ticket->evenement_naam ?></td>
-            <td><?= $ticket->evenement_datum ?></td>
-            <td><?= $ticket->evenement_prijs ?></td>
+            <td><?= $ticket->naam ?></td>
+            <td><?= $ticket->datum ?></td>
+            <td><?= $ticket->prijs ?></td>
         </tr>
     <?php } ?>
 
