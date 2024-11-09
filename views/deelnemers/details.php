@@ -6,10 +6,38 @@
     <title>Deelnemer Informatie Bewerken</title>
 </head>
 <body>
+<h2>Evenementen voor <?= $deelnemer->voornaam ?> <?= $deelnemer->naam ?> </h2>
+    <form method="POST">
+        <input type="hidden" name="deelnemer_id" value="<?= $deelnemer->deelnemer_id ?>">
+        <table>
+            <tr>
+                <th>Evenement</th>
+                <th>Datum</th>
+                <th>Locatie</th>
+                <th>Prijs</th>
+                <th>Organisator</th>
+                <th>Deelnemen</th>
+            </tr>
+            <?php foreach ($evenementen as $evenement): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($evenement->naam); ?></td>
+                    <td><?php echo htmlspecialchars($evenement->datum); ?></td>
+                    <td><?php echo htmlspecialchars($evenement->locatie); ?></td>
+                    <td><?php echo number_format($evenement->prijs, 2); ?></td>
+                    <td><?php echo htmlspecialchars($evenement->organisator); ?></td>
+                    <td>
+                        <input type="checkbox" name="evenementen[]"
+                               value="<?php echo $evenement->evenement_id; ?>"
+                               <?php echo $evenement->doet_mee ? 'checked' : ''; ?>
+                        >
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <button type="submit" name="update_evenementen">update_evenementen</button>
+    </form>
+
 <h2>Deelnemer informatie</h2>
-<h3><?= $deelnemer->voornaam ?> <?= $deelnemer->naam ?></h3>
-
-
     <form method="POST">
         <input type="hidden" id="deelnemer_id" name="deelnemer_id" value="<?= $deelnemer->deelnemer_id ?>">
         <label for="voornaam">Voornaam:</label>
@@ -27,20 +55,6 @@
         <button type="submit" name="delete">Verwijderen</button>
     </form>
 
-<h2>Tickets van: <?= $deelnemer->naam ?> <?= $deelnemer->voornaam ?></h2>
-<table>
-    <tr>
-        <th>Evenement</th>
-        <th>Datum</th>
-        <th>Prijs</th>
-    </tr>
-    <?php foreach ($tickets as $ticket) { ?>
-        <tr>
-            <td><?= $ticket->naam ?></td>
-            <td><?= $ticket->datum ?></td>
-            <td><?= $ticket->prijs ?></td>
-        </tr>
-    <?php } ?>
-
+  
 </body>
 </html>

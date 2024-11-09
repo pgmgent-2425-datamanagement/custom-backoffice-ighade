@@ -4,7 +4,7 @@ namespace App\Models;
 class Evenement extends BaseModel {
 
 
-    public static function list() {
+    public static function list($search = '') {
        $query = "SELECT 
                     e.evenement_id,
                     e.naam AS evenement_naam,
@@ -22,19 +22,20 @@ class Evenement extends BaseModel {
                 JOIN 
                     categorieën c ON e.categorie_id = c.categorie_id
                 LEFT JOIN 
-                    organisatoren o ON e.organisator_id = o.organisator_id;
+                    organisatoren o ON e.organisator_id = o.organisator_id
+                WHERE 
+                    e.naam LIKE :search OR e.omschrijving LIKE :search OR c.naam LIKE :search OR o.naam LIKE :search OR o.functie LIKE :search OR CONCAT(l.straat, ' ', l.nummer, ', ', l.postcode, ' ', l.stad) LIKE :search OR e.prijs LIKE :search OR datum LIKE :search;
                     
                 ";
         
         global $db;
+        $searchTerm = '%' . $search . '%'; // Voeg wildcards toe aan de zoekterm
         $pdo_statement = $db->prepare($query);
-        $pdo_statement->execute();
-        $db_items = $pdo_statement->fetchAll(); 
-                
+        $pdo_statement->execute([':search' => $searchTerm]);
+        $db_items = $pdo_statement->fetchAll();  
         return parent::castToModel($db_items);
-
-        // return $db_items;
     }
+
     public static function find(int $id){
         $query = "  SELECT 
                         e.evenement_id,
@@ -117,7 +118,10 @@ class Evenement extends BaseModel {
                         categorie_id,
                         naam
                     FROM 
-                        categorieën;";
+                        categorieën
+                    ORDER BY 
+                        naam;";
+                
         global $db;
         $pdo_statement = $db->prepare($query);
         $pdo_statement->execute();
@@ -138,7 +142,7 @@ class Evenement extends BaseModel {
         $pdo_statement->execute([ ':organisator_naam' => $organisator_naam, ':organisator_functie' => $organisator_functie ]);
         return $db->lastInsertId();
     }
-    public static function ChangeLocatie($straat, $nummer, $postcode, $stad, $locatie_id){
+    public static function ChangeLocatie($locatie_id, $straat, $nummer, $postcode, $stad){
         $query = "
             UPDATE locaties 
             SET straat = :straat, nummer = :nummer, postcode = :postcode, stad = :stad
@@ -148,6 +152,13 @@ class Evenement extends BaseModel {
         $pdo_statement = $db->prepare($query);
         $pdo_statement->execute([ ':stad' => $stad, ':straat' => $straat, ':nummer' => $nummer, ':postcode' => $postcode, ':locatie_id' => $locatie_id ]);
         return $locatie_id;
+    }
+    public static function createLocatie($straat, $nummer, $postcode, $stad){
+        $query = "  INSERT INTO locaties (straat, nummer, postcode, stad) VALUES (:straat, :nummer, :postcode, :stad);";
+        global $db;
+        $pdo_statement = $db->prepare($query);
+        $pdo_statement->execute([ ':stad' => $stad, ':straat' => $straat, ':nummer' => $nummer, ':postcode' => $postcode ]);
+        return $db->lastInsertId();
     }
     public static function change($evenement){
         $query = "
@@ -168,5 +179,19 @@ class Evenement extends BaseModel {
             ':organisator_id' => $evenement->organisator_id
         ]);
     }
-
+    public static function create($evenement){
+        $query = "  INSERT INTO evenementen (naam, omschrijving, datum, prijs, locatie_id, categorie_id, organisator_id) 
+                    VALUES (:naam, :omschrijving, :datum, :prijs, :locatie_id, :categorie_id, :organisator_id);";
+        global $db;
+        $pdo_statement = $db->prepare($query);
+        $pdo_statement->execute([
+            ':naam' => $evenement->evenement_naam,
+            ':omschrijving' => $evenement->evenement_omschrijving,
+            ':datum' => $evenement->evenement_datum,
+            ':prijs' => $evenement->evenement_prijs,
+            ':locatie_id' => $evenement->locatie_id,
+            ':categorie_id' => $evenement->categorie_id,
+            ':organisator_id' => $evenement->organisator_id
+        ]);
+    }
 }

@@ -12,10 +12,7 @@
     <br>
     <input type="text" id="organisator_functie" name="organisator_functie" value="<?= htmlspecialchars($organisator->organisator_functie) ?>" required>
     <br>
-
-    <h2>Hoofdorganisator Informatie</h2>
-
-    <label for="hoofdorganisator_naam">Naam:</label>
+    <label for="hoofdorganisator_naam">Hoofdorganisator:</label>
     <br>
     <select name="hoofdorganisator_naam" id="hoofdorganisator_id">
         <option value=''>Geen hoofdorganisator geselecteer</option>

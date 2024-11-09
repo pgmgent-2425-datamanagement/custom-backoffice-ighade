@@ -6,7 +6,7 @@ use App\Models\Deelnemer;
 class DeelnemerController extends BaseController {
 
     public static function list () {
-        $deelnemers = Deelnemer::list();
+        $deelnemers = Deelnemer::list($search = $_GET['search']??"");
     
         self::loadView('/deelnemers/list', [
             'deelnemers' => $deelnemers
@@ -15,27 +15,31 @@ class DeelnemerController extends BaseController {
 
      public static function details ($id) {
         $deelnemer = Deelnemer::find($id);
-        $tickets = Deelnemer::findTickets($id);
+        // $tickets = Deelnemer::findTickets($id);
+        $evenementen = Deelnemer::evenementen($id);
         self::loadView('/deelnemers/details', [
             'deelnemer' => $deelnemer,
-            'tickets' => $tickets
+            'evenementen' => $evenementen
         ]);
     }
 
-     /*public static function create ($deelnemer_details) {
-        $deelnemers = Deelnemers::create($deelnemer_details);
-
-        self::loadView('/deelnemers/details', [
-            'deelnemers' => $deelnemers
-        ]);
-    }*/
+    public static function create () {
+        $deelnemer = New Deelnemer();
+        $deelnemer->naam = $_POST['naam'];
+        $deelnemer->voornaam = $_POST['voornaam'];
+        $deelnemer->email = $_POST['email'];
+        $deelnemers = Deelnemer::create($deelnemer);
+        header('Location: /deelnemers');
+    }
 
     public static function updateOrDelete () {
+
         if (isset($_POST['delete'])) {
             $deelnemers = Deelnemer::verwijder($_POST['deelnemer_id']);
             self::loadView('/deelnemers/list', [
                 'deelnemers' => $deelnemers
             ]);
+            header('Location: /deelnemers');
         }
         elseif (isset($_POST['update'])) {
             $deelnemer = New Deelnemer();
@@ -49,8 +53,17 @@ class DeelnemerController extends BaseController {
             self::loadView('/deelnemers/list', [
                 'deelnemers' => $deelnemers
             ]);
+            header('Location: /deelnemers');
+
+        } else {
+            if (isset($_POST['evenementen'])) {
+                Deelnemer::updateEvenementen($_POST['deelnemer_id'], $_POST['evenementen']);
+                self::details($_POST['deelnemer_id']);                
+            }else{
+                Deelnemer::updateEvenementen($_POST['deelnemer_id'], []);
+                self::details($_POST['deelnemer_id']);
+            }
         }
-        header('Location: /deelnemers');
     }
 
      /*public static function remove ($id) {

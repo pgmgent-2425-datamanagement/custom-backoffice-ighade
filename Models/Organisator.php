@@ -4,7 +4,7 @@ namespace App\Models;
 class Organisator extends BaseModel {
     // public static function list() {
     //  
-    public static function list() {
+    public static function list($search = '') {
         $sql="  SELECT 
                     org.organisator_id AS organisator_id,
                     org.naam AS organisator_naam,
@@ -18,11 +18,15 @@ class Organisator extends BaseModel {
                     organisatoren AS hoofd 
                 ON 
                     org.aanbevolen_organisator_id = hoofd.organisator_id
+                WHERE 
+                    org.naam LIKE :search OR org.functie LIKE :search OR hoofd.naam LIKE :search OR hoofd.functie LIKE :search
                 ORDER BY 
                     hoofd.organisator_id;";
+                
         global $db;
+        $searchTerm = '%' . $search . '%'; // Voeg wildcards toe aan de zoekterm
         $pdo_statement = $db->prepare($sql);
-        $pdo_statement->execute();
+        $pdo_statement->execute([':search' => $searchTerm]);
         $db_items = $pdo_statement->fetchAll();
         return parent::castToModel($db_items);
     }
@@ -88,6 +92,16 @@ class Organisator extends BaseModel {
         $pdo_statement = $db->prepare($sql);
         $pdo_statement->execute([
             ':organisator_id' => $id
+        ]);
+    }
+    public static function create(Organisator $organisator){
+        $sql = "INSERT INTO organisatoren (naam, functie, aanbevolen_organisator_id) VALUES (:naam, :functie, :aanbevolen_organisator_id)";
+        global $db;
+        $pdo_statement = $db->prepare($sql);
+        $pdo_statement->execute([
+            ':naam' => $organisator->organisator_naam,
+            ':functie' => $organisator->organisator_functie,
+            ':aanbevolen_organisator_id' => $organisator->aanbevolen_organisator_id
         ]);
     }
 }

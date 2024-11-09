@@ -6,9 +6,11 @@ use App\Models\Organisator;
 class OrganisatorController extends BaseController {
 
     public static function list () {
-        $organisatoren = Organisator::list();
+        $organisatoren = Organisator::list($search = $_GET['search']??"");
+        $hoofdorganisatoren = Organisator::list();
         self::loadView('/organisatoren/list', [
-            'organisatoren' => $organisatoren
+            'organisatoren' => $organisatoren,
+            'hoofdorganisatoren' => $hoofdorganisatoren
         ]);
     }
 
@@ -24,12 +26,14 @@ class OrganisatorController extends BaseController {
         ]);
     }
 
-     public static function create ($organisator_details) {
-        $organisator = organisatoren::create($organisator_details);
+     public static function create () {
+        $organisator = New Organisator();
+        $organisator->organisator_naam = $_POST['organisator_naam'];
+        $organisator->organisator_functie = $_POST['organisator_functie'];
+        $organisator->aanbevolen_organisator_id = ($_POST['hoofdorganisator_naam']=='')?NULL:$_POST['hoofdorganisator_naam'];
+        organisator::create($organisator);
 
-        self::loadView('/organisatoren/details', [
-            'Organisatoren' => $organisatoren
-        ]);
+        header('Location: /organisatoren');
     }
 
     public static function updateOrDelete () {
