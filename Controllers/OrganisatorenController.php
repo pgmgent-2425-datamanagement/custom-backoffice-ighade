@@ -50,22 +50,11 @@ class OrganisatorController extends BaseController {
             $organisator->aanbevolen_organisator_id = ($_POST['hoofdorganisator_naam']=='')?NULL:$_POST['hoofdorganisator_naam'];
 
             Organisator::change($organisator);
-            
-            // self::loadView('/organisatoren/list', [
-            //     'organisatoren' => $organisatoren
-            // ]);
+    
         }
         header('Location: /organisatoren');
 
 
 
     }
-
-    //  public static function remove ($id) {
-    //     $organisatoren = organisatoren::remove($id);
-
-    //     self::loadView('/organisatoren/list', [
-    //         'Organisatoren' => $organisatoren
-    //     ]);
-    // }
 }

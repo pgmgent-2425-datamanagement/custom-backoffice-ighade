@@ -24,8 +24,6 @@ class BaseController {
     }
 
     private function loadView ($view = '', $params = [], $layout = 'main') {
-
-        //maakt variabelen van een array
         extract($params);
        
         ob_start();

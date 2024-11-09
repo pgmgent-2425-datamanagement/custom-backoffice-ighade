@@ -15,7 +15,6 @@ class DeelnemerController extends BaseController {
 
      public static function details ($id) {
         $deelnemer = Deelnemer::find($id);
-        // $tickets = Deelnemer::findTickets($id);
         $evenementen = Deelnemer::evenementen($id);
         self::loadView('/deelnemers/details', [
             'deelnemer' => $deelnemer,
@@ -65,12 +64,4 @@ class DeelnemerController extends BaseController {
             }
         }
     }
-
-     /*public static function remove ($id) {
-        $Deelnemers = Deelnemers::verwijder($id);
-
-        self::loadView('/deelnemers/list', [
-            'deelnemers' => $deelnemers
-        ]);
-    }*/
 }

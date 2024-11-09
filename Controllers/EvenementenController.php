@@ -56,9 +56,7 @@ class EvenementController extends BaseController {
 
         Evenement::create($evenement);
         header('Location: /evenementen');
-        // self::loadView('/evenementen/details', [
-        //     'Evenementen' => $evenementen
-        // ]);
+
     }
 
     public static function updateOrDelete () {
@@ -75,10 +73,9 @@ class EvenementController extends BaseController {
             $evenement->evenement_prijs = $_POST['evenement_prijs'];
 
             $locatieArray = self::splitLocatie($_POST['locatie_volledig']);
-            // Reguliere expressie om straat, nummer, postcode en stad te matchen
             $evenement->locatie_id = Evenement::ChangeLocatie($_POST['locatie_id'], ...$locatieArray );
-            // 
             
+    
             // checkt als de categorie al bestaat
             if ($_POST['categorie_id'] != '') {
                 $evenement->categorie_id = $_POST['categorie_id'];
@@ -100,9 +97,7 @@ class EvenementController extends BaseController {
 
             Evenement::change($evenement);
             
-            // self::loadView('/organisatoren/list', [
-            //     'organisatoren' => $organisatoren
-            // ]);
+
         }
         header('Location: /evenementen');
 

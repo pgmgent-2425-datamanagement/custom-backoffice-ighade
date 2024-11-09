@@ -2,8 +2,6 @@
 namespace App\Models;
 
 class Organisator extends BaseModel {
-    // public static function list() {
-    //  
     public static function list($search = '') {
         $sql="  SELECT 
                     org.organisator_id AS organisator_id,

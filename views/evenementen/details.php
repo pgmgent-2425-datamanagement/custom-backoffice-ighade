@@ -68,11 +68,10 @@
     </select>    
     <br>
 <!-- bij het selecteren van "Voeg niewuwe categorie toe" zal deze div zichtbaar zijn -->
-<div id="newCategorieField" style="display: none;">
-        <label for="newCategorieNaam">Nieuwe categorie Naam:</label>
-        <input type="text" id="newCategorieNaam" name="newCategorieNaam" placeholder="Categorie Naam">
-</div>
-<!-- --------------------------------------------------------------------------------- -->
+    <div id="newCategorieField" style="display: none;">
+            <label for="newCategorieNaam">Nieuwe categorie Naam:</label>
+            <input type="text" id="newCategorieNaam" name="newCategorieNaam" placeholder="Categorie Naam">
+    </div>
     <label for="organisator_naam">Organisator:</label>
     <br>
     <select name="organisator_id" id="organisator_id" onchange="toggleOrganisatorInput()">
@@ -85,24 +84,16 @@
     <p><i>selecteer hier de organisatie die het evenement organiseerd</i></p>
     
 <!-- bij het selecteren van "Voeg niewuwe organisator toe" zal deze div zichtbaar zijn -->
- <div id="newOrganisatorField" style="display: none;">
+    <div id="newOrganisatorField" style="display: none;">
         <label for="newOrganisatorNaam">Nieuwe Organisator Naam:</label>
         <input type="text" id="newOrganisatorNaam" name="newOrganisatorNaam" placeholder="Organisator Naam">
         
         <label for="newOrganisatorFunctie">Functie:</label>
         <input type="text" id="newOrganisatorFunctie" name="newOrganisatorFunctie" placeholder="Functie">
-</div>
-<!-- --------------------------------------------------------------------------------- -->
-
-
+    </div>
     <button type="submit" name="update">Opslaan</button>
     <button type="submit" name="delete">Verwijderen</button>
 </form>
-
-
-
- <!-- -------------------------- -->
-
 
     <h3>Deelnemers</h3>
     <table>
