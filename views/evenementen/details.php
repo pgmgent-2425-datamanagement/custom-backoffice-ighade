@@ -50,7 +50,7 @@
     <input type="hidden" id="locatie_id" name="locatie_id" value="<?= $evenement->locatie_id ?>">
 
 
-    <input type="text" id="locatie_volledig" name="locatie_volledig" value="<?= htmlspecialchars($evenement->locatie_volledig) ?>" required>
+    <input type="text" id="locatie_volledig" name="locatie_volledig" value="<?= htmlspecialchars(isset($evenement->locatie_volledig)?$evenement->locatie_volledig:'locatie was corupt (format niet gevolgd).') ?>" placeholder="Straat Nr, Postcode Stad" required>
     <br>
 
     <label for="evenement_prijs">Prijs:</label>
@@ -73,9 +73,7 @@
         <input type="text" id="newCategorieNaam" name="newCategorieNaam" placeholder="Categorie Naam">
 </div>
 <!-- --------------------------------------------------------------------------------- -->
-
-    <h2>Organisator Informatie</h2>
-    <label for="organisator_naam">Naam:</label>
+    <label for="organisator_naam">Organisator:</label>
     <br>
     <select name="organisator_id" id="organisator_id" onchange="toggleOrganisatorInput()">
       

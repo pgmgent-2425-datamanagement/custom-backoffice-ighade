@@ -119,28 +119,9 @@ class EvenementController extends BaseController {
                 $postcode = trim($matches[3]); // De postcode (exact 4 cijfers)
                 $stad = trim($matches[4]);     // De stad (alles na de postcode)
                 
-                // Weergave van de resultaten
             } else {
-                
-                echo "Adres niet in het juiste formaat: " . $locatie;
+                return [NULL, NULL, NULL, NULL];
             }
             return [$straat, $nummer, $postcode, $stad];
     }
-
-
-    // public static function update ($evenement_details) {
-    //     $evenement = evenementen::update($evenement_details);
-
-    //     self::loadView('/evenementen/details', [
-    //         'Evenementen' => $evenementen
-    //     ]);
-    // }
-
-    //  public static function remove ($id) {
-    //     $evenementen = evenementen::remove($id);
-
-    //     self::loadView('/evenementen/list', [
-    //         'Evenementen' => $evenementen
-    //     ]);
-    // }
 }
