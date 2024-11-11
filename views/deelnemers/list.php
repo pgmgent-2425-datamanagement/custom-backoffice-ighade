@@ -20,7 +20,20 @@
 <h1>Deelnemers in het systeem</h1>
 <form method="get">
     <input type="text" name="search" placeholder="Zoekterm" value="">
+    <div style="display: flex; justify-content: flex-start; align-items: center; width: auto;">
+        <label for="filter-image" style="margin-right: 10px;">Zonder afbeelding:</label>
+        <input type="checkbox" name="filter_image" id="filter-image" <?php echo isset($_GET['filter_image']) ? 'checked' : ''; ?> style="flex-shrink: 0; width: auto;">
+    </div>
+
+
+    <label for="sort">Sorteer op:</label>
+    <select name="sort" id="sort">
+        <option value="naam" <?php echo isset($_GET['sort']) && $_GET['sort'] == 'naam' ? 'selected' : ''; ?>>Naam</option>
+        <option value="voornaam" <?php echo isset($_GET['sort']) && $_GET['sort'] == 'voornaam' ? 'selected' : ''; ?>>Voornaam</option>
+        <option value="email" <?php echo isset($_GET['sort']) && $_GET['sort'] == 'email' ? 'selected' : ''; ?>>Email</option>
+    </select>
     <button type="submit">Zoeken</button>
+    
 </form>
 <table>
     <tr>

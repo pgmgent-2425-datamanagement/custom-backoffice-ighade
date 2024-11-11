@@ -6,7 +6,7 @@ use App\Models\Deelnemer;
 class DeelnemerController extends BaseController {
 
     public static function list () {
-        $deelnemers = Deelnemer::list($search = $_GET['search']??"");
+        $deelnemers = Deelnemer::list($search = $_GET['search']??"",isset($_GET['filter_image']) ? true : false,isset($_GET['sort']) ? $_GET['sort'] : 'naam');
     
         self::loadView('/deelnemers/list', [
             'deelnemers' => $deelnemers

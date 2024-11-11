@@ -2,9 +2,15 @@
 namespace App\Models;
 
 class Deelnemer extends BaseModel {
-    public static function list($search = '') {
-        $sql = "SELECT * FROM deelnemers WHERE naam LIKE :search OR voornaam LIKE :search OR email LIKE :search";
+    public static function list($search = '', $filterImage = false, $sortOption = 'naam') {
+        $sql = "SELECT * FROM deelnemers WHERE (naam LIKE :search OR voornaam LIKE :search OR email LIKE :search)";
         $searchTerm = '%' . $search . '%'; // Voeg wildcards toe aan de zoekterm
+
+        if ($filterImage) {
+            $sql .= " AND image IS NULL";
+        }
+        $sql .= " ORDER BY " . $sortOption;
+
         global $db;
         $stmt = $db->prepare($sql);
         $stmt->execute([':search' => $searchTerm]);
