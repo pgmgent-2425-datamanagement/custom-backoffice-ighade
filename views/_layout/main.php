@@ -15,6 +15,7 @@
             <a href="/evenementen">Evenementen</a>
             <a href="/deelnemers">Deelnemers</a>
             <a href="/organisatoren">Organisatoren</a>
+            <a href="/filemanager">Filemanager</a>
         </nav>
     </div>
 <body>

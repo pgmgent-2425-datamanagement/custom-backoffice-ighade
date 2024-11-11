@@ -14,14 +14,15 @@ class Deelnemer extends BaseModel {
 
     
 public static function change(Deelnemer $deelnemer){
-        $sql = "UPDATE deelnemers SET naam = :naam, voornaam = :voornaam, email = :email WHERE deelnemer_id = :deelnemer_id";
+        $sql = "UPDATE deelnemers SET naam = :naam, voornaam = :voornaam, email = :email, image = :image WHERE deelnemer_id = :deelnemer_id";
         global $db;
         $pdo_statement = $db->prepare($sql);
         $pdo_statement->execute([
             ':deelnemer_id' => $deelnemer->deelnemer_id,
             ':naam' => $deelnemer->naam,
             ':voornaam' => $deelnemer->voornaam,
-            ':email' => $deelnemer->email
+            ':email' => $deelnemer->email,
+            ':image' => $deelnemer->image
         ]);
     }
     public static function verwijder(int $id){
@@ -33,13 +34,14 @@ public static function change(Deelnemer $deelnemer){
         ]);
     }
     public static function create(Deelnemer $deelnemer){
-        $sql = "INSERT INTO deelnemers (naam, voornaam, email) VALUES (:naam, :voornaam, :email)";
+        $sql = "INSERT INTO deelnemers (naam, voornaam, email, image) VALUES (:naam, :voornaam, :email, :image)";
         global $db;
         $pdo_statement = $db->prepare($sql);
         $pdo_statement->execute([
             ':naam' => $deelnemer->naam,
             ':voornaam' => $deelnemer->voornaam,
-            ':email' => $deelnemer->email
+            ':email' => $deelnemer->email,
+            ':image' => $deelnemer->image
         ]);
     }
     public static function evenementen($deelnemer_id){

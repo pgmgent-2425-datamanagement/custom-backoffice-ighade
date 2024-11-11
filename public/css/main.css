@@ -142,3 +142,32 @@ input:active {
     background-color: #1474a8;
     transform: scale(0.98);
 }
+
+#image {
+    padding: 0px;
+    font-size: 0.875rem;
+    width: auto;
+    border-radius: 4px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+#deelnemerContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#deelnemerContainer img {
+    width: 40%;
+    border-radius: 8px;
+}
+
+#deelnemerContend {
+    width: 60%;
+    color: #e0e0e0;
+    background-color: #2a2a2a;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}

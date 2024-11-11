@@ -31,7 +31,7 @@ const [label2, aantal2] = JSON.parse('<?php echo $topDeelnemersData; ?>');
 const [label3, aantal3] = JSON.parse('<?php echo $topVerdienstenData; ?>');
 
 // Function to create charts dynamically
-function createChart(chartId, labels, data, title, backgroundColor, borderColor) {
+function createChart(chartId, labels, data, title, colors) {
     const ctx = document.getElementById(chartId).getContext('2d');
     return new Chart(ctx, {
         type: 'bar',
@@ -40,8 +40,8 @@ function createChart(chartId, labels, data, title, backgroundColor, borderColor)
             datasets: [{
                 label: title,
                 data: data,
-                backgroundColor: backgroundColor,
-                borderColor: borderColor,
+                backgroundColor: colors,  // Use an array of colors for each bar
+                borderColor: colors.map(color => color.replace('0.2', '1')),  // Make border colors slightly darker
                 borderWidth: 1
             }]
         },
@@ -55,8 +55,14 @@ function createChart(chartId, labels, data, title, backgroundColor, borderColor)
     });
 }
 
+// Define colors for each dataset
+const colors1 = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
+const colors2 = ['rgba(255, 159, 64, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
+const colors3 = ['rgba(255, 206, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'];
+
 // Create all charts using the function
-createChart('chart1', label1, aantal1, 'Top 5 Events', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
-createChart('chart2', label2, aantal2, 'Number of Events per Organization', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
-createChart('chart3', label3, aantal3, 'Top 3 Participants', 'rgba(255, 206, 86, 0.2)', 'rgba(255, 206, 86, 1)');
+createChart('chart1', label1, aantal1, 'Top 5 Meest Bezochte Events', colors1);
+createChart('chart2', label2, aantal2, 'Top 5 Bezoekers', colors2);
+createChart('chart3', label3, aantal3, 'Top 5 Grootste Winstmakers', colors3);
+
 </script>

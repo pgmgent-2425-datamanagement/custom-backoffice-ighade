@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
         <label for="voornaam">Voornaam:</label>
         <br>
         <input type="text" id="voornaam" name="voornaam" value="" required>
@@ -10,7 +10,11 @@
         <br>
         <input type="email" id="email" name="email" value="" required>
         <br>
-        <button type="submit" name="update">Opslaan</button>
+        <label for="image">Image:</label>
+        <br>
+        <input type="file" name="image" id="image" accept="image/*">
+        <br>
+        <button type="submit" name="create">Opslaan</button>
     </form>
 
 <h1>Deelnemers in het systeem</h1>

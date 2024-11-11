@@ -1,5 +1,3 @@
-<h1>voeg een evenement toe in het systeem</h1>
-
  <script>
     function toggleOrganisatorInput() {
         const select1 = document.getElementById("organisator_id");
@@ -85,13 +83,14 @@
     </div>
     <br>
     <button type="submit">Voeg evenement toe</button>
-
+</form>
 
 
 <h1>Evenementen in het systeem</h1>
 <form method="get">
     <input type="text" name="search" placeholder="Zoekterm" value="">
     <button type="submit">Zoeken</button>
+</form>
 <table>
     <tr>
         <th>Naam</th>
