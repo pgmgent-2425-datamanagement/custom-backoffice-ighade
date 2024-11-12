@@ -31,7 +31,6 @@ class EvenementController extends BaseController {
     }
 
      public static function create () {
-        print_r($_POST);
         $evenement= New Evenement();
         if($_POST['categorie_id'] == ''){
             $evenement->categorie_id = Evenement::addCategorie($_POST['newCategorieNaam']);
@@ -118,5 +117,55 @@ class EvenementController extends BaseController {
                 return [NULL, NULL, NULL, NULL];
             }
             return [$straat, $nummer, $postcode, $stad];
+    }
+
+    //api functies
+    public static function removeNumericKeys($event) {
+        // Convert the object to an associative array
+        $eventArray = get_object_vars($event);
+        
+        // Remove numeric keys from the array
+        return array_filter($eventArray, function($key) {
+                return !is_numeric($key);
+            }, ARRAY_FILTER_USE_KEY);
+    }
+
+    public static function apiList() {
+        $evenementen = Evenement::list($search = $_GET['search'] ?? "");
+        $cleanedData = array_map([self::class, 'removeNumericKeys'], $evenementen);
+        echo json_encode($cleanedData, JSON_PRETTY_PRINT);
+    }
+
+    public static function apiDetails ($id) {
+        $evenement = Evenement::find($id);
+        // $cleanedData = array_map([self::class, 'removeNumericKeys'], $evenement);
+        echo json_encode($evenement, JSON_PRETTY_PRINT);
+    }
+    public static function apiCreate () {
+        $evenement= New Evenement();
+        if($_POST['categorie_id'] == ''){
+            $evenement->categorie_id = Evenement::addCategorie($_POST['newCategorieNaam']);
+        }
+        else{
+            $evenement->categorie_id = $_POST['categorie_id'];
+        }
+        if($_POST['organisator_id'] == ''){
+            $evenement->organisator_id = Evenement::addOrganisator($_POST['newOrganisatorNaam'],$_POST['newOrganisatorFunctie']);
+        }
+        else{
+            $evenement->organisator_id = $_POST['organisator_id'];
+        }
+
+        $evenement->evenement_naam = $_POST['evenement_naam'];
+        $evenement->evenement_omschrijving = $_POST['evenement_omschrijving'];
+        $evenement->evenement_datum = $_POST['evenement_datum'];
+        $evenement->evenement_prijs = $_POST['evenement_prijs'];
+
+        $locatieArray = self::splitLocatie($_POST['locatie_volledig']);
+        $evenement->locatie_id = Evenement::createLocatie(...$locatieArray);
+
+        Evenement::create($evenement);
+        echo json_encode($evenement);
+    
     }
 }

@@ -29,6 +29,11 @@ $router->get('/filemanager', 'FileManagerController@list');
 $router->get('/filemanager/delete/{folder}/{id}', 'FileManagerController@delete');
 $router->get('/filemanager/{folder}', 'FileManagerController@list');
 
+// api routes
+$router->get('/api/evenementen', 'EvenementController@apiList');
+$router->get('/api/evenementen/{id}', 'EvenementController@apiDetails');
+$router->post('/api/evenementen', 'EvenementController@apiCreate');
+
 //routes voor niet gevonden pagina's
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
