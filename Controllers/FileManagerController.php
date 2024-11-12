@@ -1,5 +1,7 @@
 <?php
 namespace App\Controllers;
+use APP\Models\FileModel;
+
 class FileManagerController extends BaseController {
     public static function list ($folder = ''){
         $files = scandir(BASE_DIR . '/public/images/'. $folder);
@@ -9,7 +11,8 @@ class FileManagerController extends BaseController {
         ]);
     }
     public static function delete($folder, $file){
-        unlink(BASE_DIR . '/public/images/' . $folder . '/' . $file);        
+        FileModel::deleteFoto($file);
+        unlink(BASE_DIR . '/public/images/' . $folder . '/' . $file);      
         header('Location: /filemanager/' . $folder);
     }
 }
