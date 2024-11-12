@@ -35,6 +35,12 @@ class Evenement extends BaseModel {
         $db_items = $pdo_statement->fetchAll();  
         return parent::castToModel($db_items);
     }
+    public static function verwijder($id){
+        $query = "  DELETE FROM evenementen WHERE evenement_id = :evenement_id;";
+        global $db;
+        $pdo_statement = $db->prepare($query);
+        $pdo_statement->execute([ ':evenement_id' => $id ]);
+    }
 
     public static function find(int $id){
         $query = "  SELECT 

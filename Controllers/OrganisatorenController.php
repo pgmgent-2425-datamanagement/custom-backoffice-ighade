@@ -22,7 +22,6 @@ class OrganisatorController extends BaseController {
             'organisator' => $organisator,
             'evenementen' => $evenementen,
             'organisatoren' => $organisatoren,
-            'categorieen' => $categorieen
         ]);
     }
 
